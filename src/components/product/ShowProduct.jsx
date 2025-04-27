@@ -6,7 +6,7 @@ const ShowProduct = () => {
   const { products, filteredData, addToCart } = useContext(AppContext);
   return (
     <>
-      <div className="container  d-flex justify-content-center align-items-center">
+      <div className="container d-flex justify-content-center align-items-center">
         <div className="row container d-flex justify-content-center align-items-center my-5">
           {filteredData?.map((product) => (
             <div

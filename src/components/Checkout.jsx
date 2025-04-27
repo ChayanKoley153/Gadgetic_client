@@ -37,13 +37,12 @@ const Checkout = () => {
       const { orderId, amount: orderAmount } = orderRepons.data;
 
       var options = {
-        key: "rzp_test_qJtEPX5JnDSBt7", // Enter the Key ID generated from the Dashboard
-        amount: orderAmount * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        key: "rzp_test_qJtEPX5JnDSBt7",
+        amount: orderAmount * 100,
         currency: "INR",
         name: "Chayan Koley",
         description: "Coder",
-
-        order_id: orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        order_id: orderId,
         handler: async function (response) {
           const paymentData = {
             orderId: response.razorpay_order_id,
@@ -88,49 +87,43 @@ const Checkout = () => {
 
   return (
     <>
-      <div className="container  my-3">
-        <h1 className="text-center">Order Summary</h1>
+      <div className="min-h-screen p-4 ">
+        <h1 className="text-2xl font-bold text-center text-gray-800 mb-8">Order Summary</h1>
 
-        <table className="table table-bordered border-primary bg-dark">
-          <thead className="bg-dark">
-            <tr>
-              <th scope="col" className="bg-dark text-light text-center">
-                Product Details
-              </th>
+        {/* Responsive Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
 
-              <th scope="col" className="bg-dark text-light text-center">
-                Shipping Address
-              </th>
-            </tr>
-          </thead>
-          <tbody className="bg-dark">
-            <tr>
-              <td className="bg-dark text-light">
-                <TableProduct cart={cart} />
-              </td>
-              <td className="bg-dark text-light">
-                <ul style={{ fontWeight: "bold" }}>
-                  <li>Name : {userAddress?.fullName}</li>
-                  <li>Phone : {userAddress?.phoneNumber}</li>
-                  <li>Country : {userAddress?.country}</li>
-                  <li>State : {userAddress?.state}</li>
-                  <li>PinCode : {userAddress?.pincode}</li>
-                  <li>Near By : {userAddress?.address}</li>
-                </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      
-      <div className="container text-center my-5">
-        <button
-          className="btn btn-secondary btn-lg"
-          style={{ fontWeight: "bold" }}
-          onClick={handlePayment}
-        >
-          Procced To Pay
-        </button>
+          {/* Product Details */}
+          <div className=" p-2 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4 text-gray-700">Products</h2>
+            <div className="overflow-x-auto">
+              <TableProduct cart={cart} />
+            </div>
+          </div>
+
+          {/* Shipping Address */}
+          <div className=" p-4 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4 text-white">Shipping Address</h2>
+            <ul className="text-white space-y-2 font-medium">
+              <li><span className="font-semibold">Name:</span> {userAddress?.fullName}</li>
+              <li><span className="font-semibold">Phone:</span> {userAddress?.phoneNumber}</li>
+              <li><span className="font-semibold">Country:</span> {userAddress?.country}</li>
+              <li><span className="font-semibold">State:</span> {userAddress?.state}</li>
+              <li><span className="font-semibold">PinCode:</span> {userAddress?.pincode}</li>
+              <li><span className="font-semibold">Nearby:</span> {userAddress?.address}</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Proceed Button */}
+        <div className="text-center mt-10">
+          <button
+            onClick={handlePayment}
+            className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white text-lg font-bold rounded-lg shadow-md transition-all"
+          >
+            Proceed To Pay ₹{price}
+          </button>
+        </div>
       </div>
     </>
   );

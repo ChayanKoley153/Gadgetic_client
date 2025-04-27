@@ -56,7 +56,7 @@ const Address = () => {
   return (
     <>
       <div
-        className="container my-3 p-4"
+        className="container my-3 p-4 min-h-screen"
         style={{
           border: "2px solid yellow",
           borderRadius: "10px",

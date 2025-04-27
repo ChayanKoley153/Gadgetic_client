@@ -22,7 +22,7 @@ const TableProduct = ({ cart }) => {
     
   return (
     <>
-      <table className="table table-bordered border-primary bg-dark text-center">
+      <table className="table table-bordered border-primary bg-dark text-center min-h-screen">
         <thead>
           <tr>
             <th scope="col" className="bg-dark text-light">

@@ -6,7 +6,7 @@ import RelatedProduct from "./RelatedProduct";
 const ProductDetail = () => {
   const [product, setProduct] = useState();
   const { id } = useParams();
-  const url = "https://project-backend-3ty4.onrender.com/api";
+  const url = "http://localhost:3000/api";
 
   useEffect(() => {
     const fetchProduct = async () => {

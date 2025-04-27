@@ -5,7 +5,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AppState = (props) => {
-  const url = "https://project-backend-3ty4.onrender.com/api";
+  const url = "http://localhost:3000/api";
 
   // const url = "https://mern-e-commerce-api-youtube.onrender.com/api";
 
