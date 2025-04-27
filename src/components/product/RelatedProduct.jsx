@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AppContext from "../../context/AppContext";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const RelatedProduct = ({ category }) => {
-  const { products } = useContext(AppContext);
+  const { products, addToCart } = useContext(AppContext); // <-- added addToCart
   const [realtedProduct, setRealtedProduct] = useState([]);
+
   useEffect(() => {
     setRealtedProduct(
       products.filter(
-        (data) => data?.category?.toLowerCase() == category?.toLowerCase()
+        (data) => data?.category?.toLowerCase() === category?.toLowerCase()
       )
     );
   }, [category, products]);
@@ -18,7 +18,7 @@ const RelatedProduct = ({ category }) => {
     <>
       <div className="container text-center">
         <h1>Related Product</h1>
-        <div className="container  d-flex justify-content-center align-items-center">
+        <div className="container d-flex justify-content-center align-items-center">
           <div className="row container d-flex justify-content-center align-items-center my-5">
             {realtedProduct?.map((product) => (
               <div
@@ -51,7 +51,18 @@ const RelatedProduct = ({ category }) => {
                       <button className="btn btn-primary mx-3">
                         {product.price} {"₹"}
                       </button>
-                      <button className="btn btn-warning">Add To Cart</button>
+                      <button
+                        className="btn btn-warning"
+                        onClick={() => addToCart(
+                          product._id,
+                          product.title,
+                          product.price,
+                          1,
+                          product.imgSrc
+                        )}
+                      >
+                        Add To Cart
+                      </button>
                     </div>
                   </div>
                 </div>

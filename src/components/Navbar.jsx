@@ -90,7 +90,7 @@ const Navbar = () => {
                 <Link to={"/cart"} className="relative text-white">
                   <span className="material-symbols-outlined text-2xl">shopping_cart</span>
                   {cart?.items?.length > 0 && (
-                    <span className="absolute -top-2 -right-3 text-xs text-white bg-indigo-500 w-[18px] h-[18px] rounded-full">
+                    <span className="absolute -top-2 -right-2 text-xs px-2 text-white bg-indigo-500 w-[20px] h-[20px] rounded-full">
                       {cart.items.length}
                     </span>
                   )}
