@@ -31,7 +31,7 @@ const ShowOrderProduct = ({ items }) => {
             <h2 className="text-lg font-semibold text-white mb-2">{product.title}</h2>
             <div className="flex justify-between items-center text-sm text-gray-300">
               <span>Price:</span>
-              <span className="text-yellow-400 font-bold">${product.price}</span>
+              <span className="text-yellow-400 font-bold">{product.price}</span>
             </div>
             <div className="flex justify-between items-center text-sm text-gray-300 mt-2">
               <span>Quantity:</span>
@@ -47,7 +47,7 @@ const ShowOrderProduct = ({ items }) => {
               Total
             </button>
             <button className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 rounded">
-              ${price}
+             {price}
             </button>
             <button className="w-full bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-2 rounded">
               {qty} Items
@@ -78,7 +78,7 @@ const ShowOrderProduct = ({ items }) => {
                   />
                 </td>
                 <td className="py-3 px-4 text-white">{product.title}</td>
-                <td className="py-3 px-4 text-yellow-400 font-semibold">${product.price}</td>
+                <td className="py-3 px-4 text-yellow-400 font-semibold">₹{product.price}</td>
                 <td className="py-3 px-4 text-cyan-400 font-semibold">{product.qty}</td>
               </tr>
             ))}
@@ -92,7 +92,7 @@ const ShowOrderProduct = ({ items }) => {
               </td>
               <td className="py-3 px-4">
                 <button className="bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-2 px-4 rounded">
-                  ${price}
+                 ₹{price}
                 </button>
               </td>
               <td className="py-3 px-4">
