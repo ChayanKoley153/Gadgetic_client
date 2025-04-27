@@ -4,7 +4,7 @@ import React from 'react';
 
 const AboutPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center px-6 md:px-20 py-10">
+    <div className="flex flex-col items-center justify-center px-6 md:px-20 py-10 min-h-screen">
       
       {/* Hero Section */}
       <section className="text-center mb-16">
