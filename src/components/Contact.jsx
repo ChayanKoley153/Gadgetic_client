@@ -27,7 +27,7 @@ const ContactForm = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full md:w-1/2 lg:w-1/3 p-6 bg-blue-600 shadow-md rounded-xl ">
+      <div className="w-full md:w-1/2 lg:w-1/3 p-6 bg-blue-600 shadow-md rounded-xl">
         <h2 className="text-2xl font-semibold mb-4 text-center text-white">Contact Us</h2>
         <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
           <div>

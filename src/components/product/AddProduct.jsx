@@ -45,8 +45,8 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="container flex justify-center items-center min-h-screen">
-      <div className="max-w-md md:mx-auto mx-10 p-6 bg-blue-600 shadow-md rounded-xl">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="w-full md:w-1/2 lg:w-1/3 p-6 bg-blue-600 shadow-md rounded-xl mt-5">
         <h2 className="text-2xl font-semibold text-white mb-6 text-center">Add New Product</h2>
 
         {/* Success/Failure Message */}
