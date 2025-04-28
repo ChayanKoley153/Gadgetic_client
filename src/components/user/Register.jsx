@@ -1,27 +1,17 @@
-import React, { useContext, useState } from "react";
-import AppContext from "../../context/AppContext";
+import React, { useContext } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import AppContext from "../../context/AppContext";
 
 const Register = () => {
-  const { register } = useContext(AppContext);
+  const { register: registerUser } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  const onChangerHandler = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const { name, email, password } = formData;
-
-  const submitHandler = async (e) => {
-    e.preventDefault();
-    const result = await register(name, email, password);
+  const onSubmit = async (data) => {
+    const { name, email, password } = data;
+    const result = await registerUser(name, email, password);
     if (result.success) {
       navigate("/login");
     }
@@ -30,49 +20,65 @@ const Register = () => {
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-full md:w-1/2 lg:w-1/3 md:mx-auto p-6 bg-blue-600 shadow-md rounded-xl">
-        <h1 className="text-2xl font-semibold text-center mb-6">User Register</h1>
-        <form onSubmit={submitHandler}>
+        <h1 className="text-2xl font-semibold underline text-center mb-6">User Register</h1>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+            <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
             <input
-              name="name"
-              value={formData.name}
-              onChange={onChangerHandler}
-              type="text"
               id="name"
+              type="text"
               className="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black"
-              required
+              {...register("name", {
+                required: "Name is required",
+                minLength: {
+                  value: 3,
+                  message: "Name must be at least 3 characters long",
+                }
+              })}
             />
+            {errors.name && <p className="text-red-300 text-sm mt-1">{errors.name.message}</p>}
           </div>
 
           <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
             <input
-              name="email"
-              value={formData.email}
-              onChange={onChangerHandler}
-              type="email"
               id="email"
+              type="email"
               className="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black"
-              required
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Enter a valid email address",
+                }
+              })}
             />
+            {errors.email && <p className="text-red-300 text-sm mt-1">{errors.email.message}</p>}
           </div>
 
           <div className="mb-6">
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
+            <label htmlFor="password" className="block text-sm font-medium text-white">Password</label>
             <input
-              name="password"
-              value={formData.password}
-              onChange={onChangerHandler}
-              type="password"
               id="password"
+              type="password"
               className="mt-2 p-3 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black"
-              required
+              {...register("password", {
+                required: "Password is required",
+                minLength: {
+                  value: 6,
+                  message: "Password must be at least 6 characters long",
+                }
+              })}
             />
+            {errors.password && <p className="text-red-300 text-sm mt-1">{errors.password.message}</p>}
           </div>
 
           <div className="w-full flex justify-center">
-            <button type="submit" className="w-20 bg-green-300 text-white py-2 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-blue-400">
+            <button
+              type="submit"
+              className="w-24 bg-green-300 text-white py-2 rounded-md hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
               Register
             </button>
           </div>

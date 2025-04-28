@@ -4,82 +4,69 @@ import ShowOrderProduct from "./ShowOrderProduct";
 
 const OrderConfirmation = () => {
   const { userOrder } = useContext(AppContext);
-  const [latestOrder, setLatestOrder] = useState(null);
-
+  const [latestOrder, setLatestOrder] = useState({});
   useEffect(() => {
-    if (Array.isArray(userOrder) && userOrder.length > 0) {
+    if (userOrder) {
       setLatestOrder(userOrder[0]);
     }
   }, [userOrder]);
 
   console.log("latestOrder", latestOrder);
 
-  if (!latestOrder) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100">
-        <h2 className="text-2xl font-bold text-gray-700">No recent orders found.</h2>
-      </div>
-    );
-  }
-
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      {/* Heading */}
-      <div className="text-center my-6">
-        <h1 className="text-3xl font-bold text-gray-800">
-          Your order has been confirmed,
-        </h1>
-        <h3 className="text-xl text-gray-600 mt-2">
-          It will be delivered soon
-        </h3>
+    <>
+      <div className="container my-3">
+        <h1 className="text-center">Your order has been confirm,</h1>
+        <h3 className="text-center">It will delivered soon</h3>
       </div>
 
-      {/* Table */}
-      <div className="overflow-x-auto rounded-lg shadow-lg bg-gray-900">
-        <table className="min-w-full text-gray-200">
-          <thead className="bg-gray-800">
+      <div className="container">
+        <table className="table table-bordered border-primary bg-dark">
+          <thead className="bg-dark">
             <tr>
-              <th className="py-3 px-6 text-center text-sm font-semibold uppercase tracking-wider">
-                Order Items
+              <th scope="col" className="bg-dark text-light text-center">
+                OrderItems
               </th>
-              <th className="py-3 px-6 text-center text-sm font-semibold uppercase tracking-wider">
-                Order Details & Shipping Address
+
+              <th scope="col" className="bg-dark text-light text-center">
+                OrderDetails & ShippingAddress
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="bg-dark">
             <tr>
-              <td className="px-6 py-6 align-top">
-                <ShowOrderProduct items={latestOrder?.orderItems || []} />
+              <td className="bg-dark text-light">
+                {/* <TableProduct cart={cart} /> */}
+                <ShowOrderProduct items={latestOrder?.orderItems} />
               </td>
-              <td className="px-6 py-6">
-                {/* Order Details Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <DetailCard label="Order ID" value={latestOrder?.orderId} />
-                  <DetailCard label="Payment ID" value={latestOrder?.paymentId} />
-                  <DetailCard label="Payment Status" value={latestOrder?.payStatus} />
-                  <DetailCard label="Name" value={latestOrder?.userShipping?.fullName} />
-                  <DetailCard label="Phone" value={latestOrder?.userShipping?.phoneNumber} />
-                  <DetailCard label="Country" value={latestOrder?.userShipping?.country} />
-                  <DetailCard label="State" value={latestOrder?.userShipping?.state} />
-                  <DetailCard label="Pin Code" value={latestOrder?.userShipping?.pincode} />
-                  <DetailCard label="Nearby" value={latestOrder?.userShipping?.address} />
-                </div>
+              <td className="bg-dark text-light">
+                <ul style={{ fontWeight: "bold" }}>
+                  <li>OrderId : {latestOrder?.orderId}</li>
+                  <li>PaymentId : {latestOrder?.paymentId}</li>
+                  <li>PaymentStatus : {latestOrder?.payStatus}</li>
+                  <li>Name : {latestOrder?.userShipping?.fullName}</li>
+                  <li>Phone : {latestOrder?.userShipping?.phoneNumber}</li>
+                  <li>Country : {latestOrder?.userShipping?.country}</li>
+                  <li>State : {latestOrder?.userShipping?.state}</li>
+                  <li>PinCode : {latestOrder?.userShipping?.pincode}</li>
+                  <li>Near By : {latestOrder?.userShipping?.address}</li>
+                </ul>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-    </div>
+
+      {/* <div className="container text-center my-5">
+        <button
+          className="btn btn-secondary btn-lg"
+          style={{ fontWeight: "bold" }}
+        >
+          Procced To Pay
+        </button>
+      </div> */}
+    </>
   );
 };
-
-// Reusable Card Component for Order Details
-const DetailCard = ({ label, value }) => (
-  <div className="bg-gray-800 p-4 rounded-lg shadow hover:shadow-lg transition">
-    <h4 className="text-sm font-medium text-gray-400">{label}</h4>
-    <p className="text-lg font-semibold text-white break-words">{value || "N/A"}</p>
-  </div>
-);
 
 export default OrderConfirmation;
