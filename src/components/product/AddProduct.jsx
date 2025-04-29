@@ -26,7 +26,7 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/api/product/add', formData);
+      const response = await axios.post('https://gadgetic-api.onrender.com/add', formData);
       setMessage(response.data.message);
       setError('');
       setFormData({
