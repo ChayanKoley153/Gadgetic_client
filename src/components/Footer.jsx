@@ -34,9 +34,6 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              {isAuthenticated && <Link to={"/add-product"} className="text-white">Add Product</Link>}
-            </li>
-            <li>
               <Link to="/about" className="hover:underline">
                 About
               </Link>
