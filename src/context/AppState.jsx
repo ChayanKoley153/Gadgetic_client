@@ -5,7 +5,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AppState = (props) => {
-  const url = "http://localhost:3000/api";
+  const url = "https://gadgetic-api.onrender.com/api";
 
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState([]);
