@@ -42,7 +42,6 @@ const Navbar = () => {
           <Link to={"/"} className="text-white">Home</Link>
           <Link to={"/about"} className="text-white">About</Link>
           <Link to={"/contact"} className="text-white">Contact</Link>
-          {isAuthenticated && <Link to={"/add-product"} className="text-white">Add Product</Link>}
 
           {/* Search Bar */}
           <form

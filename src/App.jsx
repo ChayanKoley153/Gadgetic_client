@@ -13,7 +13,6 @@ import Checkout from './components/Checkout';
 import OrderConfirmation from './components/OrderConfirmation';
 import ContactForm from "./components/Contact";
 import AboutPage from "./components/About";
-import AddProduct from "./components/product/AddProduct";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,7 +32,6 @@ const router = createBrowserRouter([
       { path: "about", element: <AboutPage /> },
       { path: "shipping", element: <Address /> },
       { path: "checkout", element: <Checkout /> },
-      { path: "add-product", element: <AddProduct /> },
       { path: "orderconfirmation", element: <OrderConfirmation /> }, 
     ],
   },

@@ -8,7 +8,7 @@ const ProductDetail = () => {
   const [product, setProduct] = useState();
   const { id } = useParams();
   const { addToCart } = useContext(AppContext); // <-- Accessing addToCart here
-  const url = "https://gadgetic-api.onrender.com/api";
+  const url = "http://localhost:3000/api";
 
   useEffect(() => {
     const fetchProduct = async () => {

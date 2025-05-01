@@ -5,7 +5,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AppState = (props) => {
-  const url = "https://gadgetic-api.onrender.com/api";
+  const url = "http://localhost:3000/api";
 
   const [products, setProducts] = useState([]);
   const [token, setToken] = useState([]);
@@ -76,37 +76,55 @@ const AppState = (props) => {
     // console.log("user register ",api)
   };
 
-  // login user
+  
+  //login user
   const login = async (email, password) => {
-    const api = await axios.post(
-      `${url}/user/login`,
-      { email, password },
-      {
-        headers: {
-          "Content-Type": "Application/json",
-        },
-        withCredentials: true,
+    try {
+      const api = await axios.post(
+        `${url}/user/login`,
+        { email, password },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+  
+      if (api.status === 200 && api.data?.token) {
+        toast.success(api.data.message, {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          transition: Bounce,
+        });
+  
+        setToken(api.data.token);
+        setIsAuthenticated(true);
+        localStorage.setItem("token", api.data.token);
+        return api.data;
+      } else {
+        throw new Error("Login failed");
       }
-    );
-    // alert(api.data.message)
-    toast.success(api.data.message, {
-      position: "top-right",
-      autoClose: 1500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      transition: Bounce,
-    });
-
-    // console.log("user login ",api.data)
-    setToken(api.data.token);
-    setIsAuthenticated(true);
-    localStorage.setItem("token", api.data.token);
-    return api.data;
+    } catch (error) {
+      toast.error(
+        error.response?.data?.message || "Login failed. Please try again.",
+        {
+          position: "top-right",
+          autoClose: 2000,
+          theme: "dark",
+          transition: Bounce,
+        }
+      );
+      return null;
+    }
   };
+  
 
   // logout user
   const logout = () => {
